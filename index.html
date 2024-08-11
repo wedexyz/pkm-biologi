@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>eCOMERCE PKM 2024</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="images\koki.jpeg" type="image/x-icon">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="style.css">
+<style>
+
+.w3-sidebar a {font-family: "Roboto", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+</style>
+</head>
+<body class="w3-content" style="max-width:1200px">
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+        <span  class="close">&times;</span>
+            <div id="caption">
+                    <div class='mini'>
+                    <p class="product">Empty</p>
+                    <p class="names"></p>
+                    <p class="price"></p>
+                    <p id="miniprice"></p>
+                    <p style="display: none" id="kirim"></p>
+                    <button class="w3-button w3-green" onclick="lanjut()" >lanjutkan pemesanan via wa</button>
+                    <button class="w3-button w3-red "  onclick="tutup( )"  >Tutup</button>
+                    <div id="tampilan" style="display: none;padding-top: 10px;">
+                        <br>
+                        <br>
+                        <input type="text" id="nama" placeholder="Nama">
+                        <br>
+                        <br>
+                        <input type="text" id="alamat" placeholder="Alamat">
+                        <br>
+                        <br>
+                        <button onclick="send_handle()" > kirim wa</button>
+                    
+                        
+                    </div>
+                    </div>
+
+            </div>
+  </div>
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar" >
+  <div class="w3-container w3-display-container w3-padding-16">
+    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display"></i>
+    <img src="images\logo.PNG" height="100" width="200" alt="">
+  </div>
+
+  <div class="w3-large w3-text-grey" style="font-weight:bold" id="mySidebar">
+    <a href="#" class="w3-bar-item ">Penjualan</a>
+    <a href="#" class="w3-bar-item ">Permintaan</a>
+    <a href="#" class="w3-bar-item ">Kerja Sama</a>
+    <a href="javascript:void(0)" class="w3-button w3-block w3-transparent w3-left-align" id="myBtn"></a>
+    <img src="images/logouniba.png" height="200" width="200" alt="">
+  </div>
+
+  
+</nav>
+<!-- Top menu on small screens -->
+<header class="w3-bar w3-top w3-hide-large w3-green w3-xlarge">
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+</header>
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px; ">
+  <!-- Push down content on small screens -->
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+  <!-- Top header -->
+  <header class="w3-container w3-medium">
+    <div class="w3-row " style="margin-top: 50px;">
+      <div class="w3-container w3-quarter">
+        <button class="w3-button w3-green"><i class="fa fa-bars"></i> kategori </button>
+      </div>
+      <div class="w3-container w3-quarter">
+        <form class="example" action="/action_page.php">
+          <input type="text" placeholder="Search.." name="search">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+      <div class="w3-container w3-quarter">
+        <button class="w3-button w3-orange">pasang iklan</button>
+      </div>
+      <div class="w3-container w3-quarter">
+        <div class='cart icon-basket' >
+          <p >Daftar||Masuk</p>
+          <i  id="myImg" class="fa fa-shopping-cart w3-margin-right" style="font-size:24px;color:rgb(8, 126, 8);" > <span id="no" class='number'>0</span>   </i>
+        </div>
+      </div>
+      </div>
+
+
+
+     
+  </header>
+
+  <!-- Image header
+   
+  <div class="w3-display-container w3-container">
+    <img src="images/4.png" alt="Jeans" style="width:100%">
+    <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
+      <h1 class="w3-jumbo w3-hide-small">New arrivals</h1>
+      <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1>
+      <h1 class="w3-hide-small">COLLECTION 2016</h1>
+      <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
+    </div>
+  </div>
+ -->
+  
+
+  <!-- Product grid -->
+ 
+  <button class="tablink" onclick="openPage('Home', this, 'transparent')"id="defaultOpen" style="color: green;">Penjualan</button>
+  <button class="tablink" onclick="openPage('News', this, 'transparent')" >Permintaan</button>
+  <button class="tablink" >Kerjasama</button>
+  <div class="w3-row">
+  <div id="Home" class="tabcontent">
+    <div class="w3-col l3 s6 "id="product">
+      <div class="w3-container " >
+        <button class="chart w3-button w3-green"> Beli <i class="fa fa-shopping-cart"></i></button>
+        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#p1">LIHAT</button>
+        <!-- Modal -->
+        <div class="modal fade" id="p1" role="dialog">
+            <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            <div class="modal-body">          
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/vlRmEggzdfM?si=gucuMqi441TfMaU4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen  id="id1"></iframe>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+            </div>
+        </div>
+        
+          <div class="w3-display-container">
+              <img id="Img1" src="images/ikan.jpeg" style="width:100%;height: 200px;"  >
+              <span class=" w3-tag w3-display-topleft">Sale</span>
+              <div class="w3-display-middle w3-display-hover" >
+                  <h2  class="header" style="display: none;">Ikan Koi</h2>
+                  <p   class="price"  style="display: none;">241000,-</p>
+              </div>
+          </div>
+          
+
+         
+     
+          <p style="color: black;">Ikan Koi<br><b> Rp. 231.000,-</b></p>
+      </div>
+    </div>
+    <div class="w3-col l3 s6 "id="product">
+      <div class="w3-container " >
+        <button class="chart w3-button w3-green"> Beli<i class="fa fa-shopping-cart"></i></button>
+        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#p2">LIHAT</button>
+        <!-- Modal -->
+        <div class="modal fade" id="p2" role="dialog">
+            <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            <div class="modal-body">          
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/5as05cN9eSw?si=zHy-Hs5MVZxvI5F3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+            </div>
+        </div>
+        
+          <div class="w3-display-container">
+              <img id="Img1" src="images/koki.jpeg" style="width:100%;height: 200px;"  >
+              <span class=" w3-tag w3-display-topleft">Sale</span>
+              <div class="w3-display-middle w3-display-hover" >
+                  <h2  class="header" style="display: none;">Ikan KoKi</h2>
+                  <p   class="price"  style="display: none;">251000,-</p>
+              </div>
+          </div>
+          
+
+         
+     
+          <p style="color: black;">Ikan KoKi<br><b> Rp. 251.000,-</b></p>
+      </div>
+    </div>    
+    <div class="w3-col l3 s6 ">
+      <div class="w3-container " id="product">
+        <button class="chart w3-button w3-green"> Beli<i class="fa fa-shopping-cart"></i></button>
+        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#p31">LIHAT</button>
+        <!-- Modal -->
+        <div class="modal fade" id="p31" role="dialog">
+            <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            <div class="modal-body">          
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/PfV2Wt6-JuM?si=BhjFwJ5kMWW1GcAB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+            </div>
+        </div>
+        
+          <div class="w3-display-container">
+              <img id="Img1" src="images/MUJAER.jpeg" style="width:100%;height: 200px;"  >
+              <span class=" w3-tag w3-display-topleft">Sale</span>
+              <div class="w3-display-middle w3-display-hover" >
+                  <h2  class="header" style="display: none;">Ikan mujaer</h2>
+                  <p   class="price"  style="display: none;">25000,-</p>
+              </div>
+          </div>
+    
+          <p style="color: black;">Ikan Mujaer<br><b> Rp. 25.000,-</b></p>
+      </div>
+    </div>
+    <div class="w3-col l3 s6">
+      <div class="w3-container"  id="product">
+        <button class="chart w3-button w3-green"> Beli<i class="fa fa-shopping-cart"></i></button>
+        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#p4">LIHAT</button>
+        <!-- Modal -->
+        <div class="modal fade" id="p4" role="dialog">
+            <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            <div class="modal-body">          
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/CN0ikvGfm9o?si=Y1IX6_pqCmaIt_X3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="w3-display-container">
+              <img id="Img1" src="images/benihikan.jpg" style="width:100%;height: 200px;"  >
+              <span class=" w3-tag w3-display-topleft">Sale</span>
+              <div class="w3-display-middle w3-display-hover" >
+                  <h2  class="header" style="display: none;">Ikan benih</h2>
+                  <p   class="price"  style="display: none;">2500,-</p>
+              </div>
+          </div>
+        <p style="color: black;">Ikan benih<br><b> Rp. 2500,-</b></p>
+      </div>
+    </div>
+  
+  </div>
+  <div id="News" class="tabcontent">
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+          <div class="w3-display-container">
+              <img src="images/6.png" style="width:100%">
+              <span class="w3-tag w3-display-topleft">Sale</span>
+              <div class="w3-display-middle w3-display-hover" id="product">
+                  <h2  id="header" style="display: none;">produk 1</h2>
+                  <p  id="price" style="display: none;">231,-</p>
+                  <button id="chart"  class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+              </div>
+            </div>
+          <p>Mega Ripped Jeans<br><b>231,-</b></p>
+        </div>
+        <div class="w3-container">
+          <div class="w3-display-container">
+              <img src="images/6.png" style="width:100%">
+              <span class="w3-tag w3-display-topleft">Sale</span>
+              <div class="w3-display-middle w3-display-hover" id="product">
+                  <h2  id="header" style="display: none;">produk 1</h2>
+                  <p  id="price" style="display: none;">231,-</p>
+                  <button id="chart"  class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+              </div>
+            </div>
+          <p>Mega Ripped Jeans<br><b>231,-</b></p>
+        </div>
+
+
+    
+    </div>
+    <div class="w3-col l3 s6">
+    <div class="w3-container">
+        <div class="w3-display-container">
+            <img src="images/6.png" style="width:100%">
+            <span class="w3-tag w3-display-topleft">Sale</span>
+            <div class="w3-display-middle w3-display-hover" id="product">
+                <h2  id="header" style="display: none;">produk 1</h2>
+                <p  id="price" style="display: none;">231,-</p>
+                <button id="chart"  class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            </div>
+          </div>
+        <p>Mega Ripped Jeans<br><b>231,-</b></p>
+      </div>
+      <div class="w3-container">
+        <div class="w3-display-container">
+            <img src="images/6.png" style="width:100%">
+            <span class="w3-tag w3-display-topleft">Sale</span>
+            <div class="w3-display-middle w3-display-hover" id="product">
+                <h2  id="header" style="display: none;">produk 1</h2>
+                <p  id="price" style="display: none;">231,-</p>
+                <button id="chart"  class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+            </div>
+          </div>
+        <p>Mega Ripped Jeans<br><b>231,-</b></p>
+      </div>
+
+
+  
+    </div>
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+          <div class="w3-display-container">
+              <img src="images/6.png" style="width:100%">
+              <span class="w3-tag w3-display-topleft">Sale</span>
+              <div class="w3-display-middle w3-display-hover" id="product">
+                  <h2  id="header" style="display: none;">produk 1</h2>
+                  <p  id="price" style="display: none;">231,-</p>
+                  <button id="chart"  class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+              </div>
+            </div>
+          <p>Mega Ripped Jeans<br><b>231,-</b></p>
+        </div>
+        <div class="w3-container">
+          <div class="w3-display-container">
+              <img src="images/6.png" style="width:100%">
+              <span class="w3-tag w3-display-topleft">Sale</span>
+              <div class="w3-display-middle w3-display-hover" id="product">
+                  <h2  id="header" style="display: none;">produk 1</h2>
+                  <p  id="price" style="display: none;">231,-</p>
+                  <button id="chart"  class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+              </div>
+            </div>
+          <p>Mega Ripped Jeans<br><b>231,-</b></p>
+        </div>
+  
+  
+    
+    </div>
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+          <div class="w3-display-container">
+              <img src="images/6.png" style="width:100%">
+              <span class="w3-tag w3-display-topleft">Sale</span>
+              <div class="w3-display-middle w3-display-hover" id="product">
+                  <h2  id="header" style="display: none;">produk 1</h2>
+                  <p  id="price" style="display: none;">231,-</p>
+                  <button id="chart"  class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+              </div>
+            </div>
+          <p>Mega Ripped Jeans<br><b>231,-</b></p>
+        </div>
+        <div class="w3-container">
+          <div class="w3-display-container">
+              <img src="images/6.png" style="width:100%">
+              <span class="w3-tag w3-display-topleft">Sale</span>
+              <div class="w3-display-middle w3-display-hover" id="product">
+                  <h2  id="header" style="display: none;">produk 1</h2>
+                  <p  id="price" style="display: none;">231,-</p>
+                  <button id="chart"  class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+              </div>
+            </div>
+          <p>Mega Ripped Jeans<br><b>231,-</b></p>
+        </div>
+  
+  
+    
+    </div> 
+  </div>
+  <div id="About" class="tabcontent">
+    
+  </div>
+
+  
+  </div>
+
+  <!-- Subscribe section 
+  <div class="w3-container w3-black w3-padding-32">
+    <h1>Subscribe</h1>
+    <p>To get special offers and VIP treatment:</p>
+    <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail" style="width:100%"></p>
+    <button type="button" class="w3-button w3-red w3-margin-bottom">Subscribe</button>
+  </div>
+  -->
+  <!-- Footer 
+  <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
+    <div class="w3-row-padding">
+      <div class="w3-col s4">
+        <h4>Contact</h4>
+        <p>Questions? Go ahead.</p>
+        <form action="/action_page.php" target="_blank">
+          <p><input class="w3-input w3-border" type="text" placeholder="Name" name="Name" required></p>
+          <p><input class="w3-input w3-border" type="text" placeholder="Email" name="Email" required></p>
+          <p><input class="w3-input w3-border" type="text" placeholder="Subject" name="Subject" required></p>
+          <p><input class="w3-input w3-border" type="text" placeholder="Message" name="Message" required></p>
+          <button type="submit" class="w3-button w3-block w3-black">Send</button>
+        </form>
+      </div>
+
+      <div class="w3-col s4">
+        <h4>About</h4>
+        <p><a href="#">About us</a></p>
+        <p><a href="#">We're hiring</a></p>
+        <p><a href="#">Support</a></p>
+        <p><a href="#">Find store</a></p>
+        <p><a href="#">Shipment</a></p>
+        <p><a href="#">Payment</a></p>
+        <p><a href="#">Gift card</a></p>
+        <p><a href="#">Return</a></p>
+        <p><a href="#">Help</a></p>
+      </div>
+
+      <div class="w3-col s4 w3-justify">
+        <h4>Store</h4>
+        <p><i class="fa fa-fw fa-map-marker"></i> Company Name</p>
+        <p><i class="fa fa-fw fa-phone"></i> 0044123123</p>
+        <p><i class="fa fa-fw fa-envelope"></i> ex@mail.com</p>
+        <h4>We accept</h4>
+        <p><i class="fa fa-fw fa-cc-amex"></i> Amex</p>
+        <p><i class="fa fa-fw fa-credit-card"></i> Credit Card</p>
+        <br>
+        <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
+        <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
+        <i class="fa fa-snapchat w3-hover-opacity w3-large"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity w3-large"></i>
+        <i class="fa fa-twitter w3-hover-opacity w3-large"></i>
+        <i class="fa fa-linkedin w3-hover-opacity w3-large"></i>
+      </div>
+    </div>
+  </footer>
+
+  <div class="w3-black w3-center w3-padding-24">Powered by Wedexyz <a title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+ -->
+  <!-- End page content -->
+</div>
+
+<!-- Newsletter Modal -->
+<div id="newsletter" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
+    <div class="w3-container w3-white w3-center">
+      <i onclick="document.getElementById('newsletter').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
+      <h2 class="w3-wide">NEWSLETTER</h2>
+      <p>Join our mailing list to receive updates on new arrivals and special offers.</p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
+      <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('newsletter').style.display='none'">Subscribe</button>
+    </div>
+  </div>
+</div>
+
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'>
+</script><script  src="./script.js"></script>
+<script>
+// Accordion 
+
+// Click on the "Jeans" link on page load to open the accordion for demo purposes
+document.getElementById("myBtn").click();
+
+
+// Open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+ 
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+  document.getElementById("mySidebar").style.display = "none";
+}
+ function tutup( ){
+  modal.style.display = "none";
+ 
+}
+
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+
+/*tab link */
+function openPage(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+
+
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+/* modal image*/
+var modal1 = document.getElementById("ModalImage");
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img1 = document.getElementById("Img1");
+var modalImg1 = document.getElementById("img01");
+//var captionText = document.getElementById("caption");
+img1.onclick = function(){
+  modal1.style.display = "block";
+  modalImg1.src = this.src;
+ // captionText1.innerHTML = this.alt;
+}
+
+
+</script>
+
+
+</body>
+</html>
